@@ -1,7 +1,8 @@
-\title{\~No Title}
-\date{\today}
+\title{\~Study Notes}
+\date{Last updated on : \today}
 
 \documentclass[12pt]{article}
+\usepackage[bookmarks,bookmarksopen,bookmarksdepth=5]{hyperref}
 
 \begin{document}
 \maketitle
@@ -9,6 +10,109 @@
 %\begin{abstract}
 %This is the paper's abstract \ldots
 %\end{abstract}
+
+\section{Android Services}
+\label{Android Services}
+
+We will see, 
+\begin{enumerate}
+\item What is a Service?
+\item Service Lifecycle
+\item Permissions
+\item Process Lifecycle
+\item Local Service Sample
+\item Remote Messenger Service Sample
+\end{enumerate}
+
+\subsection{Introduction}
+A Service is an application component, representing either 
+\begin{itemize}
+\item{an application's desire to perform a longer-running operation while not interacting with the user. \textit{This corresponds to calls to \textbf{Context.startService()}}}
+\item{to supply functionality for other applications to use. \textit{This corresponds to calls to \textbf{Context.bindService()}}}
+\end{itemize} 
+Service is 
+\begin{itemize}
+\item Not a seperate process
+\item Not a seperate thread
+\end{itemize}
+Each service class must have a corresponding $<$service$>$ declaration in its package's \textit{\textbf{AndroidManifest.xml.}} \\
+Services can be started with \textbf{\textit{Context.startService()}} and \textbf{\textit{Context.bindService().}}\\
+
+
+\subsection{Service Lifecycle}
+ If someone calls \textit{Context.startService()} $\longrightarrow$ \textit{onCreate()} $\longrightarrow$ \\ \textit{onStartCommand(Intent, int, int) } $\longrightarrow$  run until \textit{Context.stopService()} or \textit{stopSelf()} is called
+
+\textit{START\_STICKY} is used for services that are explicitly started and stopped as needed. \\
+\textit{START\_NOT\_STICKY} or \textit{START\_REDELIVER\_INTENT} are used for services that should only remain running while processing any commands sent to them.\\
+\textit{onDestroy()} method is called and the service is effectively terminated.
+
+\subsection{Permissions}
+Global access to a service can be enforced when it is declared in its manifest's $<$service$>$ tag. 
+By doing so, other applications will need to declare a corresponding $<$uses-permission$>$ element in their own manifest to be able to start, stop, or bind to the service.\\
+This can be bypassed by using \textit{Intent.FLAG\_GRANT\_READ\_URI\_PERMISSION} and/or \textit{Intent.FLAG\_GRANT\_WRITE\_URI\_PERMISSION }on the Intent, when using \textit{Context.startService(Intent)}.
+\pagebreak
+\section{Two step verification : }
+\subsection{Factors of Authentication}
+\begin{tabular}{| l | c | r | p{0.000002}}
+	\hline	
+		Factor & Explanation & Example\\
+		\hline
+		\hline
+		Ownership factor & Something that user has & ID Card, A hardware, Token \\ \hline
+		Knowledge factor & Something that user knows & Password, PIN \\	\hline
+		Inherence factor & Something that is inhere to user & Biometrics like fingerprint, retina etc\\
+	\hline
+\end{tabular}
+\subsection{Two step verification : }
+For a secured and positive authentication, atleast there should be two or all three factors involve in authentication.
+\paragraph{Single Sign On} A method to authenticate in a system which has multiple secured, independent systems. By this Single Sig On, a user logins in and autheticates one system and gains acess to all the systems.
+\pagebreak
+\section{Newline representation  : }
+
+\paragraph{Carriage Return [CR] : } Reset typewriters horizontal position to the far left.
+\paragraph{Line Feed [LF] : } Advance the paper by one line.
+\\
+\\
+\textit{ASCII }Based systems 
+
+A type writer typically needs both.
+Windows uses CR+LF.
+Linux uses only LF.
+MAC OS, prior to OS-X used CR alone.
+\\
+
+IBM Pc's based on EBCDIC uses a special character called as \textit{Newline \textbf{[NL]}}
+\pagebreak
+
+\section{Turing Machine}
+
+A Turing machine can be thought of as a primitive, abstract computer. Alan Turing, who was a British mathematician and cryptographer, invented the Turing machine as a tool for studying the computability of mathematical functions. Turing's hypothesis (also known has Church's thesis) is a widely held belief that a function is computable if and only if it can be computed by a Turing machine. This implies that Turing machines can solve any problem that a modern computer program can solve. There are problems that can not be solved by a Turing machine (e.g., the halting problem); thus, these problems can not be solved by a modern computer program.
+
+\subsection{Components of a Turing Machine}
+A Turing machine has
+\begin{itemize}
+\item an infinite tape that consists of adjacent cells (or squares). 
+\item On each cell is written a symbol. The symbols that are allowed on the tape are finite in number and include the blank symbol. 
+\item Each Turing machine has it's own alphabet (i.e., finite set of symbols), which determines the symbols that are allowed on the tape.
+\item a tape head that is positioned over a cell on the tape. This tape head is able to read a symbol from a cell and write a new symbol onto a cell. 
+\item The tape head can also move to an adjacent cell (either to the left or to the right).
+\item A Turing machine has a finite number of states, and, at any point in time, a Turing machine is in one of these states. 
+\item A Turing machine begins its operation in the start state. 
+\item A Turing machine halts when it moves into one of the halt states.
+\end{itemize} 
+\pagebreak
+\subsection{Opeartion of a Turing Machine}
+\begin{enumerate}
+\item The Turing machine reads the tape symbol that is under the Turing machine's tape head. This symbol is referred to as the current symbol.
+\item The Turing machine uses its transition function to map the following: 
+\begin{center}
+\{the current state and current symbol\} =  \{the next state, the next symbol and the movement for the tape head.\}
+\end{center}
+\item The Turing machine changes its state to the next state, which was returned by the transition function.
+\item The Turing machine overwrites the current symbol on the tape with the next symbol, which was returned by the transition function.
+\item The Turing machine moves its tape head one symbol to the left or to the right, or does not move the tape head, depending on the value of the 'movement' that is returned by the transition function.
+\item If the Turing machine's state is a halt state, then the Turing machine halts. Otherwise, repeat sub-step \#1.
+\end{enumerate}
 
 \section{NP Complete}
 Decision problem :
