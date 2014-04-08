@@ -2,7 +2,9 @@
 \date{Last updated on : \today}
 
 \documentclass[12pt]{article}
-\usepackage[bookmarks,bookmarksopen,bookmarksdepth=5]{hyperref}
+%\usepackage{hyperref}% http://ctan.org/pkg/hyperref
+%\usepackage{bookmark}% http://ctan.org/pkg/bookmark
+\usepackage[bookmarks,bookmarksopen,bookmarksdepth=9]{hyperref}
 
 \begin{document}
 \maketitle
@@ -10,6 +12,91 @@
 %\begin{abstract}
 %This is the paper's abstract \ldots
 %\end{abstract}
+
+
+\section{Number-Theoretic Reference Problems}
+\subsection{Introduction}
+\begin{itemize}
+\item Security of many public-key cryptosystems dependent on intractability of the computational problems.
+\item A problem is tractable if its possible to solve in polynomial time.
+\item Problem \textit{A} can be said as reducable to Problem \textit{B}, if A can be solved by employing B and other finite operations $\xi.$
+\item If A $\leq_{p}$ B, (i.e, A is reducable to B), then A is \textit{Computationaly Equivalent} to B, written as A $\equiv_{p}$ B
+\item If  A $\equiv_{p}$ B, then both are tractabe or intractable.
+\end{itemize} 
+
+\subsection{Integer Factorization Problem}
+\begin{itemize}
+\item Given a positive integer $\textit{n}$, find its prime factors;
+\item Write n $\mid$ $n = p_{1}^{e_{1}}p_{2}^{e_{2}}...p_{k}^{e_{k}}$, where $p_{i}$ are pairwise primes and $e_{i} \geq 1.$
+\item  A set of integers is said to be pairwise coprime if a and b are coprime for every pair (a, b) of different integers in it.
+\end{itemize}
+
+\section{Cryptographic Primitives}
+\subsection{Introduction}
+\paragraph{A symmetric or private-key cipher} is one in which knowledge of the encryption key is explicitly or implicitly equivalent to knowing the decryption key.
+\paragraph{An asymmetric or public-key cipher} is one in which the encryption key is effectively public knowledge, without giving any useful information about the decryption key.
+
+\paragraph{trapdoor } is a computation which runs much more easily in one direction than back.
+
+\paragraph{Example : }Multiplication of large integers is easy, while factoring of large integers is difficult.\\
+Merely testing large numbers for primality is easy.
+
+\subsection{RSA Cipher}
+\begin{enumerate}
+\item Generate two primes, p and q, such that, atleast $>2^{512}$ or preferably $>2^{1024}$
+\item Compute \textbf{RSA Modulus, n =p.q}
+\item Choose encryption exponent, \textbf{e} $> 2$, \textbf{randomly.} \\
+Often, its \textbf{Fermats number} [A positive integer, of form, \textbf{$F_{n}=2^{2^{n}} + 1$} ]\\
+\begin{center}
+e = $2^{16} +1 = 65537$
+\end{center}
+\item Make \textbf{\textit{n}} and \textbf{\textit{e}} public
+\item Compute decryption exponent, such that,\\
+\begin{center}
+$e.d = 1 \hspace{5pt} mod \hspace{5pt} (p-1)(q-1)$
+\end{center}
+\item Encryption : $E_{n,e}(x) = x ^{e} \hspace{5pt} \% \hspace{5pt}n \Rightarrow y $
+\item Decryption : $D_{n,d}(y) = y ^{d} \hspace{5pt} \% \hspace{5pt}n \Rightarrow x $
+\end{enumerate}
+
+\pagebreak
+\section{Logrithms}
+\subsection{Logarithm definition}
+
+If, a number \textit{b} is raised to a power \textit{x}, such that,\\
+\begin{center}	$b^{x} = y$		\end{center}
+
+Then the base b logarithm of x is equal to y:
+
+\begin{center} 	log$_{b}(x) = y$	\end{center}
+
+Then, we can conjure logrithms as the inverse of exponentiation, like
+\begin{center}	$b^{y} = x $		\end{center}
+\paragraph{Example :\\}
+\begin{center}
+log$_{2}(32) = 5$	$\Rightarrow 2^{5} = 32 $
+\\log$_{2}(16) = 4$ $\Rightarrow 2^{4} = 16 $
+\\log$_{2}(8) = 3$ $\Rightarrow 2^{3} = 8 $
+\end{center}
+
+\subsection{Logrithms Rules}
+\begin{tabular}{| l | c | }
+	\hline	
+		\textbf{Rule} & \textbf{Explanation} \\
+		\hline
+		\hline
+		Logarithm product rule 		& $log_{b}(x . y) = log_{b}(x) + log_{b}(y)$ \\ \hline
+		Logarithm quotient rule 		& $log_{b}(x / y) = log_{b}(x) - log_{b}(y)$ \\ \hline
+		Logarithm power rule			& $log_{b}(x ^{y}) = y . log_{b}(x)$  \\ \hline
+		Logarithm base switch rule 	& $log_{b}(c) = 1 / log_{c}(b)$	\\ \hline
+		Logarithm base change rule 	& $log_{b}(x) = log_{c}(x) / log_{c}(b)$	\\ \hline
+		Derivative of logarithm		& $f(x) = log_{b}(x) \Rightarrow f^{'}(x) = 1 / ( x ln(b))$ \\ \hline
+		Integral of logarithm		& $\int log_{b}(x) dx = x . ( log_{b}(x) - 1 / ln(b) ) + C$  \\ \hline
+		Logarithm of negative number & $log_{b}(x)$ is undefined when $x \le 0$   \\ \hline
+		Logarithm of 0				& $log_{b}(0)$ is undefined \\ & $\lim_{x\to 0^+}\textup{log}_b(x)=-\infty$   \\ \hline
+		Logarithm of 1				& $log_{b}(1) = 0$  \\ \hline
+		Logarithm of the base		& $log_{b}(b) = 1$  \\ \hline
+\end{tabular}
 
 \section{English Syllables}
 \paragraph{Divide words based on the number of vowels: } The number of syllables in a word coincide with the number of vowel sounds you hear when speaking the word.  \\
