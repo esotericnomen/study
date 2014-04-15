@@ -1,0 +1,79 @@
+digraph unix {
+  size="5000,5000";
+  compound=true;
+
+# circo dot fdp neato nop nop1 nop2 osage patchwork sfdp twopi
+#layout=twopi;
+
+## 
+##  Beautiful
+##
+#layout=neato;
+#overlap=false;
+#splines=true;
+#pack=true;
+#start="random";
+#sep=0.1;
+
+  node [color=goldenrod2, style=filled];
+  subgraph cluster0 {
+      "Parts of Speech" -> "Article";
+      "Article" -> "Word placed before a noun";
+      "Parts of Speech" -> "Noun";
+      "Noun" -> "Name of any person, place or thing;\n A, An & The";
+      "Parts of Speech" -> "Adjective";
+      "Adjective" -> "Word that qualifies a noun";
+      "Parts of Speech" -> "Pronoun";
+      "Pronoun" -> "A Pronoun is a word\n used for or instead of a noun";
+      "Parts of Speech" -> "Verb";
+      "Verb" -> "A verb is a word that\n signifies action or the doing of something"
+      "Parts of Speech" -> "Adverb"; 
+      "Adverb" -> "An adverb is a word that\n modifies a verb, an adjective and sometimes another adverb"
+      "Parts of Speech" -> "Preposition";
+      "Preposition" -> "A preposition serves to connect \n words and to show the \nrelation between the objects \nthat the words express.";
+      "Parts of Speech" -> "Conjunction";
+      "Conjunction" -> "A conjunction is a word \nthat joins words, phrases, \nclauses and sentences together";
+      "Parts of Speech" -> "Interjection";
+      "Interjection" -> "An interjection is a word\n that expresses surprise \nor some sudden emotion of the mind";
+  }
+  subgraph cluster1 {
+      "Noun" -> "Proper Noun";
+      "Proper Noun" -> "Proper Nouns distinguish individual members";
+      "Noun" -> "Common Noun";
+      "Common Noun" -> "Common Nouns are names which \nbelong in common to a \nrace or class, as people, city";
+  }
+  subgraph cluster2{
+      "Noun" -> "Person";
+      "Person" -> "Person is that relation existing \nbetween the speaker, \nthose addressed and \nthe subject under consideration"
+      "Noun" -> "Number";
+      "Number" -> "Number is the distinction of one \nfrom more than one";
+      "Noun" -> "Gender";
+      "Noun" -> "Case";
+      "Case" -> "Case is the relation one noun bears\n to another or to a verb or to a preposition"
+  }
+  subgraph cluster3{
+      "Person" -> "First";
+      "Person" -> "Second";
+      "Person" -> "Third";
+      "First" ->  "The speaker";
+      "Second" -> "The person addressed";
+      "Third" ->  "The person or thing mentioned or under consideration"; 
+  }
+  subgraph cluster6 {
+      "Case" -> "Nominative";
+      "Case" -> "Possesive";
+      "Case" -> "Objective";
+
+  }
+  subgraph cluster5{
+      "Number" -> "Singular";
+      "Number" -> "Plural";
+  }
+
+  subgraph cluster10{
+      "Gender" -> "masculine";
+      "Gender" -> "feminine";
+      "Gender" -> "neuter";
+      "Gender" -> "common";
+  }
+}
