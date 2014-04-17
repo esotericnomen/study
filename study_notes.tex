@@ -5,6 +5,10 @@
 %\usepackage{hyperref}% http://ctan.org/pkg/hyperref
 %\usepackage{bookmark}% http://ctan.org/pkg/bookmark
 \usepackage[bookmarks,bookmarksopen,bookmarksdepth=9]{hyperref}
+\usepackage{scrextend}	% For margin
+\usepackage{xcolor}	% For colors
+\usepackage{tikz} % For tree
+\usepackage{tikz-qtree}
 
 \begin{document}
 \maketitle
@@ -13,8 +17,240 @@
 %This is the paper's abstract \ldots
 %\end{abstract}
 
+\pagebreak
+\vspace*{\fill}
+\begin{center}
+\section{English Vocabulary}
+\end{center}
+\vspace*{\fill}
+\pagebreak
 
+This is study notes on The Structure of English Words (LING150) course from http://darkwing.uoregon.edu/~l150web/index.html
+\subsection{Course Organization}
+\begin{itemize}
+\item \textbf{Unit 1:} Basic Word Analysis
+\begin{itemize}
+\item Historical sources of English words
+\item Basic principles of word analysis (morphology)
+\end{itemize}
+\item \textbf{Unit 2:} Intermediate Word Analysis and Basic Phonetics
+\begin{itemize}
+\item Alternations in morpheme forms (allomorphy)
+\item Basic principles of English sounds (phonetics)
+\end{itemize}
+\item \textbf{Unit 3:} Advanced Word Analysis and Semantic Change
+\begin{itemize}
+\item More alternations in morpheme forms (allomorphy rules)
+\item Historical changes of meanings (semantic change)
+\end{itemize}
+\item \textbf{Unit 4:} - The Origins and History of English
+\begin{itemize}
+\item Pre-history of English and Indo-European languages
+\item English history
+\end{itemize}
+\end{itemize}
+
+\subsection{Introduction to English vocabulary}
+\subsubsection{Sources of English words}
+\begin{itemize}
+\item Native words
+\item Borrowed Words
+\begin{itemize}
+\item Exotic Languages
+\item Classic Languages
+\begin{itemize}
+\item Greek
+\item Latin
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+The native words are words which are used in evryday conversations. The native words falls into follwoing categories. \\
+\\
+\begin{tabular}{| l | c | }
+	\hline	
+		\textbf{Type} & \textbf{Example} \\
+		\hline 		\hline
+		Body Parts & Foot, mouth, hand, leg \\ \hline
+		Family Relationships / Kinship terms & Father, mother, brother, sister \\ \hline
+		Everyday, Natural objects &  rock, house, hill \\ \hline
+		Physical Acts &  think, drive, ride \\ \hline
+		Physical charactrestics  & red, cold, young \\ \hline 
+\end{tabular}
+\subsubsection{Learning Model}
+Learning new words and improving new vocabulary can be carried out by the following ways.
+\begin{itemize}
+\item Absorption
+\item Memorization
+\item Analysis
+\end{itemize}
+
+\subsection{Analyzing words}
+\subsubsection{Morphemes}
+Word analysis involves breaking a word into its morphemes. Literally morphemes means \textbf{\textit{an element in a system of forms.}}\\
+In linugustics, it is defined as 
+\begin{addmargin}[3em]{2em}% 1em left, 2em right
+"The smallest \textbf{\textit{form}} which is paired with a particular \textbf{\textit{meaning}}"
+\end{addmargin} 
+From Dictionary: \textbf{\textit{morpheme}}, noun, very rare\\
+\begin{addmargin}[3em]{2em}% 1em left, 2em right
+	Minimal meaningful language unit;\\ 
+	It cannot be divided into smaller meaningful units;
+\end{addmargin}
+
+\subsubsection{Characteristics of morphemes}
+Morphemes have four defining characteristics:
+\begin{itemize}
+\item \color{blue} They cannot be subdivided.
+\color{black} \item \color{blue} They add meaning to a word.
+\color{black} \item \color{blue} They can appear in many different words.
+\color{black} \item \color{blue} They can have any number of syllables.
+\end{itemize}
+\color{black}
+
+\subsubsection{Problems with morphemes}
+There is no one-to-one mapping between \textit{FORM} $\leftrightarrow$ \textit{MEANING}
+\begin{itemize}
+\item One form, two (or more) meanings.
+	\begin{addmargin}[3em]{2em}% 1em left, 2em right
+	\color{red}\textbf{in}- \color{blue}'\textit{not}' \color{black}in words like \color{red}\textbf{in}\color{black}capable and \color{red}\textbf{in}\color{black}sufficient, \& \\
+	\color{red}\textbf{in}- \color{blue}'\textit{into, within}', \color{black}as in \color{red}\textbf{in}\color{black}vade and \color{red}\textbf{in}\color{black}clude.
+	\end{addmargin}
+
+\item Two (or more) forms, one meaning.
+\begin{itemize}
+\item Two (or more) forms, one meaning = two morphemes
+	\begin{addmargin}[3em]{2em}% 1em left, 2em right
+	\color{red}\textbf{andr}- \color{blue}'\textit{man,male}' \color{black}in words like \color{red}\textbf{and}\color{black}roid \& \\
+	\color{red}\textbf{vir}- \color{blue}'\textit{man,male}', \color{black}as in \color{red}\textbf{vir}\color{black}ile
+	\end{addmargin}
+
+\item Two (or more) forms, one meaning = one morpheme
+	\begin{addmargin}[3em]{2em}% 1em left, 2em right
+		\color{red} \textbf{pan-} \color{black} and \color{red} \textbf{pant-} \color{black}, which are different forms of a Greek morpheme meaning \color{blue}'all,overall'. 
+	\end{addmargin}
+
+\end{itemize}
+\end{itemize}
+The alternate forms of a single morpheme are called \color{blue}\textbf{allomorphs},\color{black} literally 'other forms.' 
+
+\subsubsection{How to analyze words}
+\begin{itemize}
+\item Only Words borrowed from Classic languages like Greek and Latin can be analyzed
+\item Native words or words borrowed from exotice languages can not be analyzed
+\end{itemize}
+There are four steps as following in analyzing a word
+\begin{itemize}
+\item Parse : Divide it into its morpheme
+\item Gloss : Give the meaning for a morpheme
+\item Give a literal meaning :  Use the meanings from the glosses to construct a literal meaning
+\item Give a dictionary definition : Extended literal meaning metaphorically to arrive at the actual meaning.
+\end{itemize}
+
+Example :
+	\begin{addmargin}[3em]{2em}% 1em left, 2em right
+	\begin{itemize}
+	\item \color{red} \textbf{repellent} \color{black} 
+	\item re-  /  pel  /  (l)  /  -ent
+	\item 'again, back' / 'push' / (l) / A, N
+	\item 'something which pushes back' / (l) /A,N
+	\end{itemize}
+	\end{addmargin}
+	
+'A, N.' : The letters stand for 'ADJECTIVE, NOUN'
+
+\subsection{Words - their construction and use}
+\begin{enumerate}
+\item How words are constructed
+\begin{enumerate}
+\item Types of Roots
+\item Types of Affixes
+\end{enumerate}
+\item How words are used - NOUNS, VERBS and ADJECTIVES
+\end{enumerate}
+
+\subsubsection{How words are constructed}
+\begin{center}
+\Tree [.Morphemes [.ROOTS [.Free\ Root ] [.Bounded\ Root ]] [.AFFIXES [.Prefixes ] [.Suffixes ] ]]
+\end{center}
+\paragraph{Roots}
+\begin{itemize}
+\item Roots usually have a rather specific meaning
+\item This meaning tends to be relatively constant across all the words that use the root. 
+\item Roots also contribute the greatest conceptual content to the overall meaning of the word.
+\item Every word has at the least one root. 
+\item Roots have freer distribution; that is, they can occur almost anywhere in a word
+\item Two ore more roots combine to form Compound words.
+\item Compound words may or may not have affixes.
+\end{itemize}
+
+\subparagraph{Free Roots}
+\begin{itemize}
+\item Free Roots are roots that can occur alone as whole words
+\item They can stand alone as single words.
+\item Free roots can also be combined with other roots or affixes to form more complex words
+\end{itemize}
+
+\subparagraph{Bounded Roots}
+\begin{itemize}
+\item Bound Roots can never occur alone as whole words.
+\item They cannot stand alone; 
+\item They must occur in combination with other morphemes
+\item Almost all the Latin and Greek roots we are studying are bound roots
+\end{itemize}
+
+\paragraph{Affixes}
+\begin{itemize}
+\item Affixes are morphemes which attach to roots or a combination of roots and other affixes. 
+\item Their main use is to modify the meaning conveyed by the root or roots.
+\item Affixes by definition are always bound or affixed to a root. 
+\item They are divided into two different types depending on where they attach to the root.
+\item \color{blue}Prefixes \color{black}occur before a root (although several prefixes can be strung together before a single root).
+\item \color{blue}Suffixes \color{black}occur after a root (although multiple suffixes can occur at the ends of words).
+\end{itemize}
+
+\subsection{Suffixes and Prefixes}
+\begin{enumerate}
+\item Suffixes 
+\begin{enumerate}
+\item Inflectional suffixes
+\begin{itemize}
+\item Add only grammatical information
+\item Never change the part of speech
+\end{itemize}
+\item Derivational suffixes
+\begin{itemize}
+\item Make a new word with a new meaning
+\item Usually change the part of speech
+\end{itemize}
+\item Meanings of Derivational Suffixes
+\end{enumerate}
+
+\item Prefixes
+\begin{enumerate} 
+\item Spatial Prefixes
+\begin{itemize}
+\item The largest group of prefixes denote relationships that occur in space.
+\end{itemize}
+\item Non-Spatial Prefixes
+\begin{itemize}
+\item Comparative relations
+\item Quantity and Size
+\item Negative Prefixes
+\item Intensive prefixes
+\end{itemize}
+\end{enumerate}
+\end{enumerate}
+
+
+
+\pagebreak
+\vspace*{\fill}
+\begin{center}
 \section{Number-Theoretic Reference Problems}
+\end{center}
+\vspace*{\fill}
+\pagebreak
 \subsection{Introduction}
 \begin{itemize}
 \item Security of many public-key cryptosystems dependent on intractability of the computational problems.
