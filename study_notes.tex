@@ -16,6 +16,79 @@
 %\begin{abstract}
 %This is the paper's abstract \ldots
 %\end{abstract}
+\pagebreak
+\vspace*{\fill}
+\begin{center}
+\section{Zero Knowledge Proof}
+This section is study notes on Zero Knowledge Proof Protocol.
+\end{center}
+\vspace*{\fill}
+\pagebreak
+
+\subsection{Introduction}
+\begin{itemize}
+\item A Zero-knowledge proof or Zero-knowledge protocol is a protocol used in cryptography. 
+\item The are two parties communicating. 
+\item The task of one party is to convince the other that it knows some secret, without revealing the secret.
+\item The prover of the statement is called as Peggy 
+\item The verifier of the statement is Victor 
+\item It requires some secret information on the part of the prover
+\item The definition implies that the verifier will not be able to prove the statement to anyone else
+\item An real-world example of such a protocol is the Feige-Fiat-Shamir Identification Scheme.
+\end{itemize}
+
+\subsection{Story}
+\subsubsection{Epilogue}
+\begin{itemize}
+\item Peggy has uncovered the secret word used to open a magic door in a cave
+\item The cave is shaped like a circle, with entrance on one side \& magic door blocking the opposite side.
+\item Victor says he'll pay her for the secret, but not until he's sure that she really knows it.
+\item Peggy says she'll tell him the secret, but not until she receives the money.
+\item They devise a scheme by which Peggy can prove that she knows the word without telling it to Victor.
+\end{itemize}
+
+\subsubsection{The Story}
+\begin{itemize}
+\item First, Victor waits outside the cave as Peggy goes in.
+\item They label the left and right paths from the entrance A and B.
+\item Peggy randomly takes either path A or B.
+\item Then, Victor enters the cave and shouts the name of the path he wants her to use to return
+\item Providing she really does know the magic word, this is easy:
+\item she opens the door, if necessary, and returns along the desired path.
+\item Note that Victor does not know which path she has gone down.
+\item The correctness can only be 50\% in this scheme
+\item If they were to repeat this trick many times, say 20 times in a row, 
+\item $=>$ her chance of successfully anticipating all of Victor's requests would become very small.
+\item For this reason, if Peggy reliably appears at the exit Victor names, he can conclude that \textbf{\textit{\color{blue} she is very likely}} \color{black} to know the secret word.	
+\end{itemize}
+
+\subsection{Properties of ZKP}
+A zero-knowledge proof must satisfy three properties:
+\begin{enumerate}
+\item Completeness
+\item Soundness
+\item Zero Knowledge
+\end{enumerate}
+\paragraph{Completeness} : if the statement is true, the honest verifier (that is, one following the protocol properly) will be convinced of this fact by an honest prover.
+\paragraph{Soundness} : if the statement is false, no cheating prover can convince the honest verifier that it is true, except with some small probability.
+\paragraph{Zero Knowledge} : The verifier should know only the fact that prover can prove. 
+
+\begin{itemize}
+\item The first two of these are properties of more general interactive proof systems. 
+\item The third is what makes the proof zero-knowledge.
+\end{itemize}
+
+\subsection{The soundness error}
+The small probability that prover can use to cheat verifier is called as \textbf{The soundness error}.
+ZKP are probabilistic "proofs" rather than deterministic proofs.
+
+
+
+
+
+
+
+
 
 \pagebreak
 \vspace*{\fill}
@@ -52,18 +125,10 @@ This is study notes on The Structure of English Words (LING150) course from http
 
 \subsection{Introduction to English vocabulary}
 \subsubsection{Sources of English words}
-\begin{itemize}
-\item Native words
-\item Borrowed Words
-\begin{itemize}
-\item Exotic Languages
-\item Classic Languages
-\begin{itemize}
-\item Greek
-\item Latin
-\end{itemize}
-\end{itemize}
-\end{itemize}
+\begin{center}
+\Tree [.Engligh\ Words [.Native\ Words ] [.Borrowed\ Words [.Classic\ Languages [.Greek ] [.Latin ]] [.Exotic\ Languages ] ]]
+\end{center}
+
 
 The native words are words which are used in evryday conversations. The native words falls into follwoing categories. \\
 \\
@@ -218,6 +283,20 @@ Example :
 \item Add only grammatical information
 \item Never change the part of speech
 \end{itemize}
+\begin{tabular}{| l | c | }
+	\hline	
+		\textbf{Rule} & \textbf{Explanation} \\
+		\hline
+		\hline
+			\color{red} -s \color{black} 'plural' &  The two girl\color{red}s \color{black}had eaten dinner  \\ \hline
+			\color{red} -'s \color{black}'possessive' & The cat\color{red}'s \color{black}tail was twitching   \\ \hline
+			\color{red} -ed \color{black}'past tense' & The blackest dog never bark\color{red}ed  \\ \hline
+			\color{red} -s \color{black}'3rd person present tense' & The smaller dog bark\color{red}s \color{black}a lot  \\ \hline
+			\color{red} -ing \color{black}'present participle' & The cat's tail was twitch\color{red}ing  \\ \hline
+			\color{red} -en \color{black}'past participle' &  The two girls had eat\color{red}en \color{black}dinner  \\ \hline
+			\color{red} -er \color{black}'comparative' & The small\color{red}er \color{black}dog barks a lot  \\ \hline
+			\color{red} -est \color{black}'superlative' &  The black\color{red}est \color{black}dog never barked  \\ \hline
+\end{tabular}
 \item Derivational suffixes
 \begin{itemize}
 \item Make a new word with a new meaning
