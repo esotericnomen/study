@@ -10,6 +10,7 @@
 \usepackage{tikz} % For tree
 \usepackage{tikz-qtree}
 \usepackage{msc}
+\usepackage{graphicx}
 
 \begin{document}
 \maketitle
@@ -17,7 +18,7 @@
 %\begin{abstract}
 %This is the paper's abstract \ldots
 %\end{abstract}
-
+\tableofcontents
 %\pagebreak
 %\vspace*{\fill}
 %\begin{center}
@@ -28,14 +29,178 @@
 %\pagebreak
 
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	Cryptanalysis and Attacks on Cryptosystems 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \vspace*{\fill}
 \begin{center}
-\section{Diffie Hellman Key Exchange}
-This section is study notes on Diffie Hellman Key Exchange.
+\section{Cryptanalysis and Attacks on Cryptosystems }
+This section is study notes on Cryptanalysis and Attacks on Cryptosystems 
+Reference : 	\url {http://math.colorado.edu/~hiba/crypto/cryptanalysis.html}
 \end{center}
 \vspace*{\fill}
 \pagebreak
+
+Cryptanalysis is the art of deciphering encrypted communications without knowing the proper keys. There are many cryptanalytic techniques. Some of the more important ones for a system implementer are described below.
+
+\subsection{Ciphertext-only attack}
+This is the situation where the attacker does not know anything about the contents of the message, and must work from ciphertext only. In practice it is quite often possible to make guesses about the plaintext, as many types of messages have fixed format headers. Even ordinary letters and documents begin in a very predictable way. For example, many classical attacks use frequency analysis of the ciphertext, however, this does not work well against modern ciphers.
+
+Modern cryptosystems are not weak against ciphertext-only attacks, although sometimes they are considered with the added assumption that the message contains some statistical bias.
+
+\subsection{Known-plaintext attack}
+The attacker knows or can guess the plaintext for some parts of the ciphertext. The task is to decrypt the rest of the ciphertext blocks using this information. This may be done by determining the key used to encrypt the data, or via some shortcut.
+
+One of the best known modern known-plaintext attacks is linear cryptanalysis against block ciphers.
+
+\subsection{Chosen-plaintext attack}
+The attacker is able to have any text he likes encrypted with the unknown key. The task is to determine the key used for encryption.
+
+A good example of this attack is the differential cryptanalysis which can be applied against block ciphers (and in some cases also against hash functions).
+
+Some cryptosystems, particularly RSA, are vulnerable to chosen-plaintext attacks. When such algorithms are used, care must be taken to design the application (or protocol) so that an attacker can never have
+chosen plaintext encrypted.
+
+\subsection{Man-in-the-middle attack}
+This attack is relevant for cryptographic communication and key exchange
+protocols. The idea is that when two parties, A and B, are exchanging keys for secure communication (e.g., using Diffie-Hellman), an adversary positions himself between A and B on the communication line. The adversary then intercepts the signals that A and B send to each other, and performs a key exchange with A and B separately. A and B will end up using a different key, each of which is known to the adversary. The adversary can then decrypt any communication from A with the key he shares with A, and then resends the communication to B by encrypting it again with the key he shares with B. Both A and B will think that they are communicating securely, but in fact the adversary is hearing everything.
+
+The usual way to prevent the man-in-the-middle attack is to use a public key cryptosystem capable of providing digital signatures. For set up, the parties must know each others public keys in advance. After the shared secret has been generated, the parties send digital signatures of it to each other. The man-in-the-middle can attempt to forge these signatures, but fails because he cannot fake the signatures.
+
+This solution is sufficient in the presence of a way to securely distribute public keys. One such way is a certificate hierarchy such as X.509. It is used for example in IPSec.
+
+Correlation between the secret key and the output of the cryptosystem is the main source of information to the cryptanalyst. In the easiest case, the information about the secret key is directly leaked by the cryptosystem. More complicated cases require studying the correlation (basically, any relation that would not be expected on the basis of chance alone) between the observed (or measured) information about the cryptosystem and the guessed key information.
+
+For example, in linear (resp. differential) attacks against block ciphers the cryptanalyst studies the known (resp. chosen) plaintext and the observed ciphertext. Guessing some of the key bits of the cryptosystem the analyst determines by correlation between the plaintext and the ciphertext whether she guessed correctly. This can be repeated, and has many variations.
+
+The differential cryptanalysis introduced by Eli Biham and Adi Shamir in late 1980's was the first attack that fully utilized this idea against block ciphers (especially against DES). Later Mitsuru Matsui came up with linear cryptanalysis which was even more effective against DES. More recently, new attacks using similar ideas have been developed.
+
+Perhaps the best introduction to this material is the proceedings of EUROCRYPT and CRYPTO throughout the 1990's. There can be found Mitsuru Matsui's discussion of linear cryptanalysis of DES, and the ideas of truncated differentials by Lars Knudsen (for example, IDEA cryptanalysis). The book by Eli Biham and Adi Shamir about the differential cryptanalysis of DES is the "classical" work on this subject.
+
+The correlation idea is fundamental to cryptography and several researchers have tried to construct cryptosystems which are provably secure against such attacks. For example, Knudsen and Nyberg have studied provable security against differential cryptanalysis.
+
+Attack against or using the underlying hardware: in the last few years as more and more small mobile crypto devices have come into widespread use, a new category of attacks has become relevant which aim directly at the hardware implementation of the cryptosystem.
+
+The attacks use the data from very fine measurements of the crypto device doing, say, encryption and compute key information from these measurements. The basic ideas are then closely related to those in other correlation attacks. For instance, the attacker guesses some key bits and attempts to verify the correctness of the guess by studying correlation against her measurements.
+
+Several attacks have been proposed such as using careful timings of the device, fine measurements of the power consumption, and radiation patterns. These measurements can be used to obtain the secret key or other kinds information stored on the device.
+
+This attack is generally independent of the used cryptographical algorithms and can be applied to any device that is not explicitly protected against it.
+
+Faults in cryptosystems can lead to cryptanalysis and even the discovery of the secret key. The interest in
+cryptographical devices lead to the discovery that some algorithms behaved very badly with the introduction of small faults in the internal computation.
+
+For example, the usual implementation of RSA private key operations are very susceptible to fault attacks. It has been shown that by causing one bit of error at a suitable point can reveal the factorization of the modulus (i.e. it reveals the private key).
+
+Similar ideas have been applied to a wide range of algorithms and devices. It is thus necessary that cryptographical devices are designed to be highly resistant against faults (and against malicious introduction of faults by cryptanalysts).
+
+\subsection{Quantum computing}
+Peter Shor's paper on polynomial time factoring and discrete logarithm algorithms
+with quantum computers has caused growing interest in quantum computing. Quantum computing is a recent field of research that uses quantum mechanics to build computers that are, in theory, more powerful than modern serial computers. The power is derived from the inherent parallelism of quantum mechanics. So instead of doing tasks one at a time, as serial machines do, quantum computers can perform them all at once. Thus it is hoped that with
+quantum computers we can solve problems infeasible with serial machines.
+
+Shor's results imply that if quantum computers could be implemented effectively then most of public key cryptography will become history. However, they are much less effective against secret key cryptography.
+
+Current state of the art of quantum computing does not appear alarming, as only very small machines have been implemented. The theory of quantum computation gives much promise for better performance than serial computers, however, whether it will be realized in practice is an open question.
+
+Quantum mechanics is also a source for new ways of data hiding and secure communication with the potential of offering unbreakable security, this is the field of quantum cryptography. Unlike quantum computing, many successful experimental implementations of quantum cryptography have been already achieved. However, quantum cryptography is still some way off from being realized in commercial applications.
+
+\subsection{DNA cryptography}
+Leonard Adleman (one of the inventors of RSA) came up with the idea of using DNA as
+computers. DNA molecules could be viewed as a very large computer capable of parallel execution. This parallel nature could give DNA computers exponential speed-up against modern serial computers.
+
+There are unfortunately problems with DNA computers, one being that the exponential speed-up requires also exponential growth in the volume of the material needed. Thus in practice DNA computers would have limits
+on their performance. Also, it is not very easy to build one.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	Strength of Cryptographic Algorithms
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+\vspace*{\fill}
+\begin{center}
+\section{Strength of Cryptographic Algorithms }
+This section is study notes on Strength of Cryptographic Algorithms 
+Reference : 	\url {http://math.colorado.edu/~hiba/crypto/strength.html}
+\end{center}
+\vspace*{\fill}
+\pagebreak
+
+
+
+
+Good cryptographic systems should always be designed so that they are as difficult to break as possible. It is possible to build systems that cannot be broken in practice (though this cannot usually be proved). This does not significantly increase system implementation effort; however, some care and expertise is required. There is no excuse for a system designer to leave the system breakable. Any mechanisms that can be used to circumvent security must be made explicit, documented, and brought into the attention of the end users.
+
+In theory, any cryptographic method with a key can be broken by trying all possible keys in sequence. If using brute force to try all keys is the only option, the required computing power increases exponentially with the length of the key. A 32 bit key takes 232 (about 109) steps. This is something anyone can do on his/her home computer. A system with 40 bit keys takes 240 steps - this kind of computation requires something like a week (depending on the efficiency of the algorithm) on a modern home computer. A system with 56 bit keys (such as DES) takes a substantial effort (with a large number of home computers using distributed effort, it has been shown to take just a few months), but is easily breakable with special hardware. The cost of the special hardware is substantial but easily within reach of organized criminals, major companies, and governments. Keys with 64 bits are probably breakable now by major governments, and within reach of organized criminals, major companies, and lesser governments in few years. Keys with 80 bits appear good for a few years, and keys with 128 bits will probably remain unbreakable by brute force for the foreseeable future. Even larger keys are sometimes used.
+
+However, key length is not the only relevant issue. Many ciphers can be broken without trying all possible keys. In general, it is very difficult to design ciphers that could not be broken more effectively using other methods. Designing your own ciphers may be fun, but it is not recommended for real applications unless you are a true expert and know exactly what you are doing.
+
+One should generally be very wary of unpublished or secret algorithms. Quite often the designer is then not sure of the security of the algorithm, or its security depends on the secrecy of the algorithm. Generally, no algorithm that depends on the secrecy of the algorithm is secure. Particularly in software, anyone can hire someone to disassemble and reverse-engineer the algorithm. Experience has shown that the vast majority of secret algorithms that have become
+public knowledge later have been pitifully weak in reality.
+
+The key lengths used in public-key cryptography are usually much longer than those used in symmetric ciphers. This is caused by the extra structure that is available to the cryptanalyst. There the problem is not that of guessing the right key, but deriving the matching secret key from the public key. In the case of RSA, this could be done by factoring a large integer that has two large prime factors. In the case of some other cryptosystems it is equivalent to computing the discrete logarithm modulo a large integer (which is believed to be roughly comparable to factoring when the moduli is a large prime number). There are public key cryptosystems based on yet other problems.
+
+To give some idea of the complexity for the RSA cryptosystem, a 256 bit modulus is easily factored at home, and 512 bit keys can be broken by university research groups within a few months. Keys with 768 bits are probably not secure in the long term. Keys with 1024 bits and more should be safe for now unless major cryptographical advances are made against RSA; keys of 2048 bits are considered by many to be secure for decades.
+
+It should be emphasized that the strength of a cryptographic system is usually equal to its weakest link. No aspect of the system design should be overlooked, from the choice algorithms to the key distribution and usage policies.
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	Diffie Hellman Scheme
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+\vspace*{\fill}
+\begin{center}
+\section{Diffie Hellman Scheme}
+This section is study notes on Diffie Hellman Computational assumption, Decisive assumption 
+and Key Exchange protocol.
+\end{center}
+\vspace*{\fill}
+\pagebreak
+The \textbf{Diffie-Hellman assumption's} are the assumption's that a certain 
+computational problem within a cyclic group is hard.
+\subsection{Computational Diffie-Hellman assumption}
+\begin{itemize}
+\item The CDH assumption is related to the \textit{\textbf{discrete logarithm assumption}}.
+\item Given $(g,g^a,g^b) \,$ its hard to compute $g^{ab}$
+\end{itemize}
+
+\subsection{Decisional Diffie-Hellman assumption}
+\begin{itemize}
+\item Chosen $a,b \in Z_p$, Given $(g,a,b,g^a,g^b,) \,$ and  the value $g^{ab}$ "looks like" a  random element in G
+\end{itemize}
+
 \subsection{Diffie Hellman Key Exchange}
 \begin{itemize}
 \item Generate tow prime numbers $(g,p)$
@@ -66,7 +231,13 @@ This section is study notes on Diffie Hellman Key Exchange.
 \item Alice and Bob exchanges $A'$ and $B'$
 \item Now, both have $(g^{ab} \bmod p)$
 \end{itemize}
+\includegraphics{res/Diffie-Hellman_Key_Exchange.png}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	Malleable Encryption
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \pagebreak
 \vspace*{\fill}
@@ -111,6 +282,14 @@ $                       = E(mt)$
 \end{center}
 
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	ElGamal Encryption
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \pagebreak
 \vspace*{\fill}
@@ -201,7 +380,11 @@ decrypt message $2m$
 
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	Certificate Less Key Exchange, In Presence of a Strong Adversary
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \pagebreak
@@ -218,7 +401,11 @@ access to all of the messages transmitted over the channel and who can modify th
 \pagebreak
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	Zero Knowledge Proof
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \pagebreak
 \vspace*{\fill}
@@ -292,7 +479,11 @@ ZKP are probabilistic "proofs" rather than deterministic proofs.
 
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	English Vocabulary
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \pagebreak
 \vspace*{\fill}
@@ -527,6 +718,13 @@ Example :
 
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	Number-Theoretic Reference Problems
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \pagebreak
 \vspace*{\fill}
 \begin{center}
@@ -550,6 +748,17 @@ Example :
 \item  A set of integers is said to be pairwise coprime if a and b are coprime for every pair (a, b) of different integers in it.
 \end{itemize}
 
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	Cryptographic Primitives
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Cryptographic Primitives}
 \subsection{Introduction}
 \paragraph{A symmetric or private-key cipher} is one in which knowledge of the encryption key is explicitly or implicitly equivalent to knowing the decryption key.
@@ -578,8 +787,19 @@ $e.d = 1 \hspace{5pt} mod \hspace{5pt} (p-1)(q-1)$
 \item Decryption : $D_{n,d}(y) = y ^{d} \hspace{5pt} \% \hspace{5pt}n \Rightarrow x $
 \end{enumerate}
 
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	Logarithms
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
-\section{Logrithms}
+\section{Logarithms}
 \subsection{Logarithm definition}
 
 If, a number \textit{b} is raised to a power \textit{x}, such that,\\
@@ -589,7 +809,7 @@ Then the base b logarithm of x is equal to y:
 
 \begin{center} 	log$_{b}(x) = y$	\end{center}
 
-Then, we can conjure logrithms as the inverse of exponentiation, like
+Then, we can conjure logarithms as the inverse of exponentiation, like
 \begin{center}	$b^{y} = x $		\end{center}
 \paragraph{Example :\\}
 \begin{center}
@@ -598,7 +818,7 @@ log$_{2}(32) = 5$	$\Rightarrow 2^{5} = 32 $
 \\log$_{2}(8) = 3$ $\Rightarrow 2^{3} = 8 $
 \end{center}
 
-\subsection{Logrithms Rules}
+\subsection{Logarithms Rules}
 \begin{tabular}{| l | c | }
 	\hline	
 		\textbf{Rule} & \textbf{Explanation} \\
@@ -617,19 +837,28 @@ log$_{2}(32) = 5$	$\Rightarrow 2^{5} = 32 $
 		Logarithm of the base		& $log_{b}(b) = 1$  \\ \hline
 \end{tabular}
 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	English Syllables
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{English Syllables}
 \paragraph{Divide words based on the number of vowels: } The number of syllables in a word coincide with the number of vowel sounds you hear when speaking the word.  \\
 
 Example : B\underline{a} $\mid n\underline{a} \mid$ n\underline{a}
 
-\paragraph{Vovels:} 'a,' 'e,' 'i,' 'o,' 'u' and 'y' are considered as vovewls, when found in the middle or at the end of a word.
+\paragraph{Vowels:} 'a,' 'e,' 'i,' 'o,' 'u' and 'y' are considered as vowels, when found in the middle or at the end of a word.
 
 \subparagraph{Subtract 1 for each silent vowel in the word:} Example : 'came' and 'gone,' 'E' is the most common silent vowel.
 
 \subparagraph{Consider words ending in 'le' as a vowel:} Divide the word before the consonant right before the 'le'. \\
 Example : Little would be divided lit/tle; fumble as fum/ble; able as a/ble.
 
-\subparagraph{Count diphthongs as 1 syllable instead of 2 : } diphthongs are two vowels, combinedly giving one syllabel. Example : Words like 'h\underline{au}l,' 'm\underline{oo}n,' and 'c\underline{oi}l' are diphthongs.
+\subparagraph{Count diphthongs as 1 syllable instead of 2 : } diphthongs are two vowels, combined giving one syllable. Example : Words like 'h\underline{au}l,' 'm\underline{oo}n,' and 'c\underline{oi}l' are diphthongs.
 
 \subparagraph{Split words between consonants, surrounded by vowels.} Example :  hap/py, din/ner, bas/ket, un/der. 
 
@@ -637,6 +866,13 @@ Example : Little would be divided lit/tle; fumble as fum/ble; able as a/ble.
 
 \subparagraph{Mark prefixes and suffixes as syllabels: }
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	Group
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \section{Group}
 
@@ -658,7 +894,7 @@ A group G is a finite or infinite set of elements together with a binary operati
 
 \paragraph{Cyclic Group:} Cyclic group is a group, that is generated by a single element. That is,
 \begin{itemize}
-\item It consists of a set of elemnets, with single invertible assosiative operation and
+\item It consists of a set of elements, with single invertible associative operation and
 \item a element g, such that, every other element in the group can be obtained by applying the group operation or its inverse to g.
 \end{itemize}
 
@@ -667,6 +903,14 @@ Cyclic group is closed under addition, associative and has unique inverse.
 \paragraph{Homomorphism:} A map between two groups, which preserve identity and group operation is called Homomorphism.
 
 \paragraph{Isomorphism:} If a homomorphism has an inverse which is also an homomorphism, this is called as \textit{isomorphism} and the two group is said to be isomorphic.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	Android Services
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \pagebreak
 \section{Android Services}
 \label{Android Services}
@@ -674,9 +918,9 @@ Cyclic group is closed under addition, associative and has unique inverse.
 We will see, 
 \begin{enumerate}
 \item What is a Service?
-\item Service Lifecycle
+\item Service Life-cycle
 \item Permissions
-\item Process Lifecycle
+\item Process Life-cycle
 \item Local Service Sample
 \item Remote Messenger Service Sample
 \end{enumerate}
@@ -708,7 +952,14 @@ Global access to a service can be enforced when it is declared in its manifest's
 By doing so, other applications will need to declare a corresponding $<$uses-permission$>$ element in their own manifest to be able to start, stop, or bind to the service.\\
 This can be bypassed by using \textit{Intent.FLAG\_GRANT\_READ\_URI\_PERMISSION} and/or \textit{Intent.FLAG\_GRANT\_WRITE\_URI\_PERMISSION }on the Intent, when using \textit{Context.startService(Intent)}.
 \pagebreak
-\section{Two step verification : }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	Two step verification
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Two step verification}
 \subsection{Factors of Authentication}
 \begin{tabular}{| l | c | r | p{0.000002}}
 	\hline	
@@ -720,11 +971,17 @@ This can be bypassed by using \textit{Intent.FLAG\_GRANT\_READ\_URI\_PERMISSION}
 		Inherence factor & Something that is inhere to user & Biometrics like fingerprint, retina etc\\
 	\hline
 \end{tabular}
-\subsection{Two step verification : }
+\subsection{Two step verification}
 For a secured and positive authentication, atleast there should be two or all three factors involve in authentication.
 \paragraph{Single Sign On} A method to authenticate in a system which has multiple secured, independent systems. By this Single Sig On, a user logins in and autheticates one system and gains acess to all the systems.
 \pagebreak
-\section{Newline representation  : }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	Newline representation
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Newline representation}
 
 \paragraph{Carriage Return [CR] : } Reset typewriters horizontal position to the far left.
 \paragraph{Line Feed [LF] : } Advance the paper by one line.
@@ -741,6 +998,13 @@ MAC OS, prior to OS-X used CR alone.
 IBM Pc's based on EBCDIC uses a special character called as \textit{Newline \textbf{[NL]}}
 \pagebreak
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	Turing Machine
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Turing Machine}
 
 A Turing machine can be thought of as a primitive, abstract computer. Alan Turing, who was a British mathematician and cryptographer, invented the Turing machine as a tool for studying the computability of mathematical functions. Turing's hypothesis (also known has Church's thesis) is a widely held belief that a function is computable if and only if it can be computed by a Turing machine. This implies that Turing machines can solve any problem that a modern computer program can solve. There are problems that can not be solved by a Turing machine (e.g., the halting problem); thus, these problems can not be solved by a modern computer program.
@@ -771,6 +1035,12 @@ A Turing machine has
 \item If the Turing machine's state is a halt state, then the Turing machine halts. Otherwise, repeat sub-step \#1.
 \end{enumerate}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	NP Complete
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{NP Complete}
 Decision problem :
 Any problem with an answer, YES or NO.
@@ -801,7 +1071,7 @@ The halting problem is the classic NP-hard problem. This is the problem that giv
 
 \paragraph{P = NP :} This the most famous problem in computer science, and one of the most important outstanding questions in the mathematical sciences. In fact, the Clay Institute is offering one million dollars for a solution to the problem (Stephen Cook's writeup on the Clay website is quite good). It's clear that P is a subset of NP. The open question is whether or not NP problems have deterministic polynomial time solutions. It is largely believed that they do not. Here is an outstanding recent article on the latest (and the importance) of the P = NP problem: The Status of the P versus NP problem.
 
-The best book on the subject is Computers and Intractability by Garey and Johnson. My favorite NP-complete problem is the Minesweeper problem.
+The best book on the subject is Computers and Intractability by Garey and Johnson. My favourite NP-complete problem is the Minesweeper problem.
 \bibliographystyle{abbrv}
 \bibliography{main}
 
