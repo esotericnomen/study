@@ -9,6 +9,7 @@
 \usepackage{xcolor}	% For colors
 \usepackage{tikz} % For tree
 \usepackage{tikz-qtree}
+\usepackage{msc}
 
 \begin{document}
 \maketitle
@@ -16,6 +17,209 @@
 %\begin{abstract}
 %This is the paper's abstract \ldots
 %\end{abstract}
+
+%\pagebreak
+%\vspace*{\fill}
+%\begin{center}
+%\section{Section Title}
+%Description of this section
+%\end{center}
+%\vspace*{\fill}
+%\pagebreak
+
+
+\pagebreak
+\vspace*{\fill}
+\begin{center}
+\section{Diffie Hellman Key Exchange}
+This section is study notes on Diffie Hellman Key Exchange.
+\end{center}
+\vspace*{\fill}
+\pagebreak
+\subsection{Diffie Hellman Key Exchange}
+\begin{itemize}
+\item Generate tow prime numbers $(g,p)$
+\item Communicate $(g,p)$ and consider its available with both \textit{Alice} and \textit{Bob}
+
+\item Alice picks a random secret, $a$ and computes
+\begin{itemize}
+\item $A$ = $g^a \bmod p$
+\end{itemize}
+
+\item Bob picks a random secret, $b$ and computes
+\begin{itemize}
+\item $B$ = $g^b \bmod p$
+\end{itemize}
+
+\item Alice and Bob exchange $A$ and $B$
+
+\item Alice Computes, $A'$ as following
+\begin{itemize}
+\item $A'$ = $B^a \bmod p$ = $(g^b \bmod p)^a \bmod p$
+\end{itemize}
+
+\item Bob Computes, $B'$ as following
+\begin{itemize}
+\item $B'$ = $A^b \bmod p$ = $(g^a \bmod p)^b \bmod p$
+\end{itemize}
+
+\item Alice and Bob exchanges $A'$ and $B'$
+\item Now, both have $(g^{ab} \bmod p)$
+\end{itemize}
+
+
+\pagebreak
+\vspace*{\fill}
+\begin{center}
+\section{Malleable Encryption}
+A cryptographic algorithm is considered to be \textit{malleable}, if an encrypted cipher text of message \textit{m}, 
+can be converted into another cipher text, which can be decrypted with known function \textit{f(m)}, without 
+prior knowledge of \textit{m}. Malleability does not refer to ability to read the encrypted message. \\
+\end{center}
+\vspace*{\fill}
+\pagebreak
+
+
+\subsection{Malleability in Encryption}
+
+
+Generally, \textit{Malleability} is an undesirable property for any crypto system. But for certain special 
+cases, like \textit{Homomorphic Encryption,} [: form of encryption which allows specific type of operations on
+cipher text, to generate a cipher text, which when decrypted matches to the operations performed on plain 
+text.]
+
+\subsubsection{RSA Example}
+To demonstrate malleability, we can consider RSA encryption scheme.
+
+\bigskip
+
+RSA Encryption scheme for encrypting a message \textit{m}, using the public key pair (e,n), can be expressed 
+as,
+\bigskip
+
+\begin{center}
+$E(m) = (m)^e \bmod n$
+\end{center}
+
+Given the above parameters, except \textit{m}, it is still possible to construct encryption of message \textit{E(mt)} as below.
+\bigskip
+
+\begin{center}
+$ E(m).t^e \bmod n = ((m)^e \bmod n).(t^e \bmod n)$
+$                       = ((m.t)^e \bmod n)$
+$                       = E(mt)$
+\end{center}
+
+
+
+\pagebreak
+\vspace*{\fill}
+\begin{center}
+\section{ElGamal Encryption}
+This section is study notes on ElGamal Encryption Scheme, a \textit{asymmetric key encryption} algorithm,
+based on \textit{Diffie-Helman Key exchange}, proposed by \textit{Taher Elgamal}, in 1985.
+\end{center}
+ElGamal encryption can be defined over any cyclic group G. \\
+Its security depends upon the \textbf{difficulty of computing discrete logarithms.}
+\vspace*{\fill}
+\pagebreak
+
+\subsection{Algorithm}
+ElGamal encryption consists of three components: 
+\begin{itemize}
+
+\item Key generator,
+\item Encryption algorithm,
+\item Decryption algorithm.
+\end{itemize}
+
+\subsubsection{Key generation}
+\begin{itemize}
+\item Define \textbf{cyclic group}  \(G\), of order \(q\) with generator \(g\).
+\item Choose a random number \(x\) from \{1,..\(q\)-1\}
+\item Compute \(p\) = $g^{x}$\\
+\textbf{\item The tuple (\(G\), \(q\),\(g\),\(p\)) is public key.
+\item \(x\) is the private key}
+\end{itemize}
+
+\subsubsection{Encryption}
+\begin{itemize}
+\item Randomly choose \(y\) from \{1,..\(q\)-1\}
+\item Calculate shared secret $s = p^y$
+\item Covert message \(m\) into \(m\)' of \(G\)
+\item Calculate \(c_{1}\) = $g^y$
+\item Calculate \(c_{2}\) = \(m\)'.\(s\) 
+\item Calculate $(c_{1},c_{2})=(g^y, m'\cdot p^y)=(g^y, m'\cdot(g^x)^y)$ \\
+\item If \(m\) is known, \(m\)' can be calculated from which, $p^y$ can be calculated
+\end{itemize}
+
+\subsubsection{Decryption}
+\begin{itemize}
+\item calculates the shared secret $s=c_1^x\,$
+\item computes $m'=c_2 \cdot s^{-1}\,$
+\item $c_2 \cdot s^{-1} = m'\cdot p^y \cdot (g^{xy})^{-1} = m'\cdot g^{xy} \cdot g^{-xy} = m'.$
+\end{itemize}
+
+%\begin{msc}{Elgamal}
+%
+%\declinst{usr}{User}{}
+%\declinst{m1}{Machine 1}{control}
+%\declinst{m2}{Machine 2}{drill}
+%\declinst{m3}{Machine 3}{test}
+%
+%\mess{startm1}{usr}{m1}
+%\nextlevel
+%\mess{startm2}{m1}{m2}
+%\nextlevel
+%\mess{continue}{m2}{m3}
+%\mess{log}{m1}{envleft}
+%\nextlevel
+%\mess{output}{m3}{usr}[2]
+%\nextlevel
+%\mess{free}{m1}{usr}
+%\nextlevel
+%
+%\end{msc}
+
+\subsection{Security of ElGamal Encryption}
+\begin{itemize}
+
+\item The security of the ElGamal scheme depends on the properties of the underlying group G as well as any padding scheme used on the messages.
+\item If the \textit{computational Diffie–Hellman assumption} (CDH) holds in the underlying cyclic group G, then the encryption function is one-way.
+\item If the \textit{decisional Diffie–Hellman assumption} (DDH) holds in G, then ElGamal achieves \textit{semantic security}.
+\item Elgamal Encryption is \textit{\textbf{Unconditionally Malleable}}
+\item Hence it is \textit{\textbf{Not secure under Chosen Ciphertext attack} (CCA)}
+\item i.e. If $(c_1, c_2)$ are given for any message \(m\), its easy to calculate, $(c_1, 2c_2)$ in order to 
+decrypt message $2m$
+\item To achieve CCA security, appropriate padding scheme should be used.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+\pagebreak
+\vspace*{\fill}
+\begin{center}
+\section{Certificate Less Key Exchange, In Presence of a Strong Adversary}
+Exchanging two public key, over an insecure channel or without any presence of earlier shared secret, 
+always needs a certificate to be issued by a \textit{Trusted Third party}, aka, \textit{Certifying Authority}.
+But this is not always possible, especially in \textit{Ad hoc} networks. We propose a solution to such a 
+scenario, to exchange the key, over an insecure channel, in presence of such the strong adversary, who has 
+access to all of the messages transmitted over the channel and who can modify the message if he wishes.
+\end{center}
+\vspace*{\fill}
+\pagebreak
+
+
+
+
 \pagebreak
 \vspace*{\fill}
 \begin{center}
